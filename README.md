@@ -29,7 +29,8 @@ class User extends Model
 }
 ```
 
-The JSON column values can then be via an object property:-
+The JSON column values can then be get or set via an object property:-
+(the value can be an array or an object too!)
 
 ```php
 $user->settings()->showProfilePicture;
