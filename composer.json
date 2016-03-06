@@ -1,5 +1,5 @@
 {
-    "name": "bluora/model-json-column-trait",
+    "name": "bluora/model-json-column",
     "description": "Provides JSON datatype support for the Eloquent ORM",
     "keywords": ["laravel","illuminate","eloquent","json","schemaless","schema-free"],
     "license": "MIT",
