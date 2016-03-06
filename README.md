@@ -1,6 +1,6 @@
-# Model JSON Column
+# Laravel Eloquent Model - JSON column support
 
-Model JSON Column adds support for the JSON datatype column for model provided by the [Eloquent ORM](http://laravel.com/docs/eloquent). 
+Adds support for the JSON datatype column for model provided by the [Eloquent ORM](http://laravel.com/docs/eloquent).
 
 ## Installation
 
