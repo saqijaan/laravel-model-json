@@ -59,7 +59,22 @@ class JsonColumnValue
         }
     }
 
-    public function getOriginalValue()
+    /**
+     * Get the current data as an array
+     * 
+     * @return array
+     */
+    public function getCurrent()
+    {
+        return $this->data;
+    }
+
+    /**
+     * Get the current data json encoded
+     * 
+     * @return string
+     */
+    public function getJson()
     {
         $dirty = $this->getDirty();
         if (count($dirty)) {
