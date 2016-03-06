@@ -42,7 +42,7 @@ trait JsonColumnTrait
      */
     public function inspectJson()
     {
-        if (!!empty($this->json_columns)) {
+        if (!empty($this->json_columns)) {
             foreach ($this->json_columns as $column_name) {
                 $this->processJson($column_name, $this->attributes[$column_name]);
             }
