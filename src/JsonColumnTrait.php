@@ -75,7 +75,7 @@ trait JsonColumnTrait
             $this->processJson($column_name, $this->attributes[$column_name]);
             return;
         }
-        parent::setAttribute($key, $value);
+        parent::setAttribute($column_name, $value);
     }
 
     /**
@@ -109,11 +109,14 @@ trait JsonColumnTrait
                     $original[$column_name] = $json_data->getOriginal();
                 }
             } else {
-                list($column_name, $json_key) = explode('.', $key, 2);
-                if ($json_key != '' && array_key_exists($column_name, $this->json_values)) {
-                    $original = $this->json_values[$column_name]->getOriginal($json_key, $default);
-                } else {
-                    $original = $default;
+                $key_array = explode('.', $key, 2);
+                if (count($key_array) > 1) {
+                    list($column_name, $json_key) = $key_array;
+                    if ($json_key != '' && array_key_exists($column_name, $this->json_values)) {
+                        $original = $this->json_values[$column_name]->getOriginal($json_key, $default);
+                    } else {
+                        $original = $default;
+                    }
                 }
             }
         }

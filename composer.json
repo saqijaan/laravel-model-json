@@ -1,5 +1,5 @@
 {
-    "name": "bluora/model-json-column",
+    "name": "bluora/laravel-model-json-column",
     "description": "Provides JSON datatype support for the Eloquent ORM",
     "keywords": ["laravel","illuminate","eloquent","json","schemaless","schema-free"],
     "license": "MIT",
@@ -21,7 +21,7 @@
     },
     "autoload": {
         "psr-4": {
-            "ModelJsonColumn\\": "src/ModelJsonColumn/"
+            "ModelJsonColumn\\": "src/"
         }
     }
 }
