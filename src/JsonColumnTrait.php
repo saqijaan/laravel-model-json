@@ -7,29 +7,33 @@ use Closure;
 trait JsonColumnTrait
 {
     /**
-     * Holds the referenced json data
+     * Holds the referenced json data.
+     *
      * @var array
      */
-    private  $json_values = [];
+    private $json_values = [];
 
     /**
-     * Holds methods for accessing the json data
+     * Holds methods for accessing the json data.
+     *
      * @var array
      */
-    private  $json_methods = [];
+    private $json_methods = [];
 
     /**
      * Create a new model instance that is existing.
      * Overrides parent to set Json columns.
      *
-     * @param  array  $attributes
-     * @param  string|null  $connection
+     * @param array       $attributes
+     * @param string|null $connection
+     *
      * @return static
      */
     public function newFromBuilder($attributes = [], $connection = null)
     {
         $model = parent::newFromBuilder($attributes, $connection);
         $model->inspectJson();
+
         return $model;
     }
 
@@ -55,7 +59,7 @@ trait JsonColumnTrait
             $value = '';
         }
         $this->json_values[$column_name] = new JsonColumnValue($value);
-        $json_column_access = function & ($column_name) {
+        $json_column_access = function &($column_name) {
             return $this->json_values[$column_name];
         };
         $this->json_methods[$column_name] = Closure::bind($json_column_access, $this, static::class);
@@ -64,8 +68,9 @@ trait JsonColumnTrait
     /**
      * Set a given attribute on the known JSON elements.
      *
-     * @param  string  $key
-     * @param  mixed   $value
+     * @param string $key
+     * @param mixed  $value
+     *
      * @return void
      */
     public function setAttribute($column_name, $value)
@@ -73,6 +78,7 @@ trait JsonColumnTrait
         if (!empty($this->json_values) && array_key_exists($column_name, $this->json_values)) {
             $this->attributes[$column_name] = $value;
             $this->processJson($column_name, $this->attributes[$column_name]);
+
             return;
         }
         parent::setAttribute($column_name, $value);
@@ -81,8 +87,9 @@ trait JsonColumnTrait
     /**
      * Handle dynamic method calls to the json value objects.
      *
-     * @param  string  $method
-     * @param  array  $parameters
+     * @param string $method
+     * @param array  $parameters
+     *
      * @return mixed
      */
     public function __call($method, $parameters)
@@ -90,14 +97,16 @@ trait JsonColumnTrait
         if (isset($this->json_methods[$method])) {
             return call_user_func_array($this->json_methods[$method], [$method]);
         }
+
         return parent::__call($method, $parameters);
     }
 
     /**
      * Get the model's original attribute values.
      *
-     * @param  string|null $key
-     * @param  mixed  $default
+     * @param string|null $key
+     * @param mixed       $default
+     *
      * @return array
      */
     public function getOriginal($key = null, $default = null)
@@ -120,6 +129,7 @@ trait JsonColumnTrait
                 }
             }
         }
+
         return $original;
     }
 
@@ -127,7 +137,7 @@ trait JsonColumnTrait
      * Add the change in any json value objects, and if requested
      * provide the columns (dot notation) within the json value objects.
      *
-     * @return Array
+     * @return array
      */
     public function getDirty($include_json = false)
     {
@@ -135,7 +145,7 @@ trait JsonColumnTrait
         if (!empty($this->json_values)) {
             foreach ($this->json_values as $column_name => $json_data) {
                 if (count($json_data->getDirty())) {
-                    $dirty[$column_name] = (string)$json_data;
+                    $dirty[$column_name] = (string) $json_data;
                 }
             }
         }
@@ -150,6 +160,7 @@ trait JsonColumnTrait
                 }
             }
         }
+
         return $dirty;
     }
 }
