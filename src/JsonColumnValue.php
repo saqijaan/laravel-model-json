@@ -5,25 +5,28 @@ namespace ModelJsonColumn;
 class JsonColumnValue
 {
     /**
-     * Holds the original data provided from the model
+     * Holds the original data provided from the model.
+     *
      * @var string
      */
     private $original_value = '';
 
     /**
-     * Holds the current data
+     * Holds the current data.
+     *
      * @var array
      */
     private $data = [];
 
     /**
-     * Holds the original data provided by the model
+     * Holds the original data provided by the model.
+     *
      * @var array
      */
     private $original_data = [];
 
     /**
-     * Add the data to the object
+     * Add the data to the object.
      *
      * @return array
      */
@@ -44,8 +47,9 @@ class JsonColumnValue
     /**
      * Get the json data original values.
      *
-     * @param  string|null  $key
-     * @param  mixed  $default
+     * @param string|null $key
+     * @param mixed       $default
+     *
      * @return array
      */
     public function getOriginal($key = null, $default = null)
@@ -60,8 +64,8 @@ class JsonColumnValue
     }
 
     /**
-     * Get the current data as an array
-     * 
+     * Get the current data as an array.
+     *
      * @return array
      */
     public function getCurrent()
@@ -70,8 +74,8 @@ class JsonColumnValue
     }
 
     /**
-     * Get the current data json encoded
-     * 
+     * Get the current data json encoded.
+     *
      * @return string
      */
     public function getJson()
@@ -80,13 +84,14 @@ class JsonColumnValue
         if (count($dirty)) {
             $this->original_value = $this->__toString();
         }
+
         return $this->original_value;
     }
 
     /**
      * Add json data values that have changed.
      *
-     * @return Array
+     * @return array
      */
     public function getDirty()
     {
@@ -100,16 +105,17 @@ class JsonColumnValue
             }
         }
         if (count($dirty)) {
-            $this->original_value = (string)$this->original_value;
+            $this->original_value = (string) $this->original_value;
         }
+
         return $dirty;
     }
 
     /**
-     * Track new column additions
-     * 
+     * Track new column additions.
+     *
      * @param string $key
-     * @param mixed $value
+     * @param mixed  $value
      */
     public function __set($key, $value)
     {
@@ -120,8 +126,8 @@ class JsonColumnValue
     }
 
     /**
-     * Convert to json encoded string
-     * 
+     * Convert to json encoded string.
+     *
      * @return string
      */
     public function __toString()

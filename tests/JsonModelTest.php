@@ -9,7 +9,7 @@ class JsonModelTest extends PHPUnit_Framework_TestCase
     public function testInspectJson()
     {
         // Mock the model with data
-        $mock = new MockJsonModel;
+        $mock = new MockJsonModel();
         $mock->setJsonColumns(['testColumn']);
         $mock->setAttribute('testColumn', json_encode(['foo' => 'bar']));
 
@@ -26,12 +26,12 @@ class JsonModelTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * Assert that JSON attributes can be set through mutators
+     * Assert that JSON attributes can be set through mutators.
      */
     public function testSetAttribute()
     {
         // Mock the model with data
-        $mock = new MockJsonModel;
+        $mock = new MockJsonModel();
         $mock->setJsonColumns(['testColumn']);
         $mock->setAttribute('testColumn', json_encode(['foo' => 'bar']));
 
