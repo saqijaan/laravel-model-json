@@ -33,11 +33,7 @@ class JsonColumnValue
     public function __construct(&$value)
     {
         $this->original_value = &$value;
-        if (!is_array($value)) {
-            $this->data = json_decode($this->original_value, true);
-        } else {
-            $this->data = $this->original_value;
-        }
+        $this->data = (!is_array($value)) ? json_decode($this->original_value, true) : $this->original_value;
         $this->original_data = $this->data;
         foreach ($this->data as $key => &$value) {
             $this->$key = &$value;
@@ -58,9 +54,8 @@ class JsonColumnValue
             return $this->original_data;
         } elseif (array_key_exists($key, $this->original_data)) {
             return $this->original_data[$key];
-        } else {
-            return $default;
         }
+        return $default;
     }
 
     /**
