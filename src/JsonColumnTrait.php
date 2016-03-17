@@ -145,6 +145,21 @@ trait JsonColumnTrait
     }
 
     /**
+     * Convert the model's attributes to an array.
+     *
+     * @return array
+     */
+    public function attributesToArray()
+    {
+        if (!empty($this->json_columns)) {
+            foreach ($this->json_columns as $column_name) {
+                $this->json_values[$column_name]->getDirty();
+            }
+        }
+        return parent::attributesToArray();
+    }
+
+    /**
      * Handle dynamic method calls to the json value objects.
      *
      * @param string $method
