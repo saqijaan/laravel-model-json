@@ -30,9 +30,9 @@ class JsonColumnValue
      *
      * @return array
      */
-    public function __construct(& $value)
+    public function __construct(&$value)
     {
-        $this->original_value = & $value;
+        $this->original_value = &$value;
         if (!is_array($value)) {
             $this->data = json_decode($this->original_value, true);
         } else {
@@ -104,7 +104,8 @@ class JsonColumnValue
                 $dirty[$key] = $value;
             }
         }
-        $this->original_value = (string)$this;
+        $this->original_value = (string) $this;
+
         return $dirty;
     }
 

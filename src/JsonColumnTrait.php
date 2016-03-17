@@ -53,13 +53,13 @@ trait JsonColumnTrait
         }
     }
 
-    public function processJson($column_name, & $value)
+    public function processJson($column_name, &$value)
     {
         if (empty($value)) {
             $value = '';
         }
         $this->json_values[$column_name] = new JsonColumnValue($value);
-        $json_column_access = function & ($column_name) {
+        $json_column_access = function &($column_name) {
             return $this->json_values[$column_name];
         };
         $this->json_methods[$column_name] = Closure::bind($json_column_access, $this, static::class);
@@ -78,6 +78,7 @@ trait JsonColumnTrait
         if (!empty($this->json_columns) && in_array($column_name, $this->json_columns)) {
             $this->attributes[$column_name] = $value;
             $this->processJson($column_name, $this->attributes[$column_name]);
+
             return;
         }
         parent::setAttribute($column_name, $value);
@@ -111,6 +112,7 @@ trait JsonColumnTrait
                 }
             }
         }
+
         return $original;
     }
 
@@ -141,6 +143,7 @@ trait JsonColumnTrait
                 }
             }
         }
+
         return $dirty;
     }
 
@@ -156,6 +159,7 @@ trait JsonColumnTrait
                 $this->json_values[$column_name]->getDirty();
             }
         }
+
         return parent::attributesToArray();
     }
 
@@ -172,6 +176,7 @@ trait JsonColumnTrait
         if (isset($this->json_methods[$method])) {
             return call_user_func_array($this->json_methods[$method], [$method]);
         }
+
         return parent::__call($method, $parameters);
     }
 }
