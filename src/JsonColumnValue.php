@@ -26,17 +26,31 @@ class JsonColumnValue
     private $original_data = [];
 
     /**
+     * Holds the defaults
+     *
+     * @var array
+     */
+    private $defaults = [];
+
+    /**
      * Add the data to the object.
      *
      * @return array
      */
-    public function __construct(&$value)
+    public function __construct(&$attribute_value, $defaults)
     {
-        $this->original_value = &$value;
-        $this->data = (!is_array($value)) ? json_decode($this->original_value, true) : $this->original_value;
+        $this->original_value = &$attribute_value;
+        $this->defaults = $defaults;
+        $this->data = (!is_array($attribute_value)) ? json_decode($this->original_value, true) : $this->original_value;
         $this->original_data = $this->data;
         foreach ($this->data as $key => &$value) {
             $this->$key = &$value;
+            unset($value);
+        }
+        foreach ($this->defaults as $key => $value) {
+            if (!isset($this->data[$key])) {
+                $this->$key = $value;
+            }
         }
     }
 
@@ -55,6 +69,7 @@ class JsonColumnValue
         } elseif (array_key_exists($key, $this->original_data)) {
             return $this->original_data[$key];
         }
+
         return $default;
     }
 

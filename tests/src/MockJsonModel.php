@@ -22,6 +22,11 @@ class MockJsonModel extends Illuminate\Database\Eloquent\Model
         $this->casts = $columns;
     }
 
+    public function setJsonColumnDefaults(string $column_name, $defaults)
+    {
+        $this->json_defaults[$column_name] = $defaults;
+    }
+
     public function getCustomGetAttribute()
     {
         return 'custom getter result';

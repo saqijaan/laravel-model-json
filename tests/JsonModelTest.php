@@ -93,7 +93,7 @@ class JsonModelTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * Assert that JSON attribute can handle multidimensional updates.
+     * Assert that JSON attribute reports the changes correctly
      */
     public function testDirtyJson()
     {
@@ -116,7 +116,7 @@ class JsonModelTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * Assert that JSON attribute can handle multidimensional updates.
+     * Assert that JSON attribute reports changes correctly
      */
     public function testDirtyJsonMultiDimension()
     {
@@ -134,12 +134,29 @@ class JsonModelTest extends PHPUnit_Framework_TestCase
 
         $mock->testColumn()->foo = 'bar2';
         $mock->testColumn()->foo2 = 'bar2';
-        $mock->testColumn()->foo3 = []; // We need make it so we don't have to do this
+        $mock->testColumn()->foo3 = []; // We need to make it so we don't have to do this
         $mock->testColumn()->foo3['foo5'] = 'bar3';
 
         // This should not be dirty
         $this->assertArrayHasKey('testColumn.foo2', $mock->getDirty(true));
         $this->assertArrayHasKey('testColumn.foo3', $mock->getDirty(true));
         $this->assertArrayHasKey('foo5', $mock->getDirty(true)['testColumn.foo3']);
+    }
+
+    /**
+     * Assert that JSON attribute can set defaults
+     */
+    public function testDefaults()
+    {
+        // Mock the model with data
+        $mock = new MockJsonModel();
+        $mock->setJsonColumns(['testColumn']);
+        $mock->setCastsColumns(['testColumn' => 'json']);
+        $mock->setJsonColumnDefaults('testColumn', ['bar2' => 'bar3', 'bar3' => 'bar5']);
+        $mock->setAttribute('testColumn', json_encode(['foo' => 'bar', 'bar3' => 'bar4']));
+
+        $this->assertArrayHasKey('bar2', $mock->toArray()['testColumn']);
+        $this->assertEquals($mock->testColumn()->bar2, 'bar3');
+        $this->assertEquals($mock->testColumn()->bar3, 'bar4');
     }
 }
