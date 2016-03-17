@@ -1,6 +1,6 @@
 # Laravel Eloquent Model - JSON column support
 
-[![Build Status](https://travis-ci.org/bluora/laravel-model-json-column.svg?branch=master)](https://travis-ci.org/bluora/laravel-model-json-column) 
+[![Build Status](https://travis-ci.org/bluora/laravel-model-json-column.svg?branch=master)](https://travis-ci.org/bluora/laravel-model-json-column) [![StyleCI](https://styleci.io/repos/53236988/shield)](https://styleci.io/repos/53236988) [![Test Coverage](https://codeclimate.com/github/bluora/laravel-model-json-column/badges/coverage.svg)](https://codeclimate.com/github/bluora/laravel-model-json-column/coverage) [![Code Climate](https://codeclimate.com/github/bluora/laravel-model-json-column/badges/gpa.svg)](https://codeclimate.com/github/bluora/laravel-model-json-column)
 
 Adds support for the JSON datatype column for model provided by the [Eloquent ORM](http://laravel.com/docs/eloquent).
 
