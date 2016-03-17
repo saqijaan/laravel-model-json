@@ -3,7 +3,7 @@
 class JsonModelTest extends PHPUnit_Framework_TestCase
 {
     /**
-     * Assert that defined JSON attributes are made available
+     * Assert that defined JSON attributes are made available.
      */
     public function testInspectJson()
     {
@@ -26,7 +26,7 @@ class JsonModelTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * Assert that JSON attributes can be changed, and new attribute added
+     * Assert that JSON attributes can be changed, and new attribute added.
      */
     public function testSetAttribute()
     {
@@ -50,7 +50,7 @@ class JsonModelTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * Assert that JSON attribute can handle multidimensions
+     * Assert that JSON attribute can handle multidimensions.
      */
     public function testMultiDimension()
     {
@@ -70,7 +70,7 @@ class JsonModelTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * Assert that JSON attribute can handle multidimensional updates
+     * Assert that JSON attribute can handle multidimensional updates.
      */
     public function testUpdateMultiDimension()
     {
@@ -93,7 +93,7 @@ class JsonModelTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * Assert that JSON attribute can handle multidimensional updates
+     * Assert that JSON attribute can handle multidimensional updates.
      */
     public function testDirtyJson()
     {
@@ -107,7 +107,7 @@ class JsonModelTest extends PHPUnit_Framework_TestCase
         $mock->inspectJson();
 
         // This should not be dirty
-        $this->assertArrayNotHasKey( 'foo', $mock->getDirty(true));
+        $this->assertArrayNotHasKey('foo', $mock->getDirty(true));
 
         $mock->testColumn()->foo = 'bar2';
         // This should not be dirty
@@ -116,7 +116,7 @@ class JsonModelTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * Assert that JSON attribute can handle multidimensional updates
+     * Assert that JSON attribute can handle multidimensional updates.
      */
     public function testDirtyJsonMultiDimension()
     {
@@ -130,7 +130,7 @@ class JsonModelTest extends PHPUnit_Framework_TestCase
         $mock->inspectJson();
 
         // This should not be dirty
-        $this->assertArrayNotHasKey( 'foo', $mock->getDirty(true));
+        $this->assertArrayNotHasKey('foo', $mock->getDirty(true));
 
         $mock->testColumn()->foo = 'bar2';
         $mock->testColumn()->foo2 = 'bar2';
