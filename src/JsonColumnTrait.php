@@ -85,23 +85,6 @@ trait JsonColumnTrait
     }
 
     /**
-     * Handle dynamic method calls to the json value objects.
-     *
-     * @param string $method
-     * @param array  $parameters
-     *
-     * @return mixed
-     */
-    public function __call($method, $parameters)
-    {
-        if (isset($this->json_methods[$method])) {
-            return call_user_func_array($this->json_methods[$method], [$method]);
-        }
-
-        return parent::__call($method, $parameters);
-    }
-
-    /**
      * Get the model's original attribute values.
      *
      * @param string|null $key
@@ -162,5 +145,22 @@ trait JsonColumnTrait
         }
 
         return $dirty;
+    }
+
+    /**
+     * Handle dynamic method calls to the json value objects.
+     *
+     * @param string $method
+     * @param array  $parameters
+     *
+     * @return mixed
+     */
+    public function __call($method, $parameters)
+    {
+        if (isset($this->json_methods[$method])) {
+            return call_user_func_array($this->json_methods[$method], [$method]);
+        }
+
+        return parent::__call($method, $parameters);
     }
 }
