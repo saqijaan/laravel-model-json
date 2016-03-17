@@ -93,7 +93,7 @@ class JsonModelTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * Assert that JSON attribute reports the changes correctly
+     * Assert that JSON attribute reports the changes correctly.
      */
     public function testDirtyJson()
     {
@@ -116,7 +116,7 @@ class JsonModelTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * Assert that JSON attribute reports changes correctly
+     * Assert that JSON attribute reports changes correctly.
      */
     public function testDirtyJsonMultiDimension()
     {
@@ -144,7 +144,7 @@ class JsonModelTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * Assert that JSON attribute can set defaults
+     * Assert that JSON attribute can set defaults.
      */
     public function testDefaults()
     {
