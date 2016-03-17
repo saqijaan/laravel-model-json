@@ -26,7 +26,7 @@ class JsonColumnValue
     private $original_data = [];
 
     /**
-     * Holds the defaults
+     * Holds the defaults.
      *
      * @var array
      */
