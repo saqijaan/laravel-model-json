@@ -1,5 +1,7 @@
 # Laravel Eloquent Model - JSON column support
 
+[![Build Status](https://travis-ci.org/bluora/laravel-model-json-column.svg?branch=master)](https://travis-ci.org/bluora/laravel-model-json-column) 
+
 Adds support for the JSON datatype column for model provided by the [Eloquent ORM](http://laravel.com/docs/eloquent).
 
 ## Installation
