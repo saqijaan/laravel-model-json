@@ -60,6 +60,14 @@ trait JsonColumnTrait
         }
     }
 
+    /**
+     * Process the json column
+     * @param  string $column_name
+     * @param  mixed &$value
+     * @return void
+     * 
+     * @SuppressWarnings(PHPMD.StaticAccess)
+     */
     public function processJson($column_name, &$value)
     {
         if (empty($value)) {
@@ -130,6 +138,8 @@ trait JsonColumnTrait
      * provide the columns (dot notation) within the json value objects.
      *
      * @return array
+     * 
+     * @SuppressWarnings(PHPMD.BooleanArgumentFlag)
      */
     public function getDirty($include_json = false)
     {
