@@ -19,14 +19,14 @@ class JsonColumnValue
     private static $original_data = [];
 
     /**
-     * Holds specific defaults
+     * Holds specific defaults.
      *
      * @var array
      */
     private static $defaults = [];
 
     /**
-     * Holds specific options to internally deal with values
+     * Holds specific options to internally deal with values.
      *
      * @var array
      */
@@ -84,6 +84,7 @@ class JsonColumnValue
         foreach (get_object_vars($this) as $key => $value) {
             $data[$key] = $value;
         }
+
         return $data;
     }
 
@@ -149,8 +150,9 @@ class JsonColumnValue
     /**
      * Check if key exists.
      *
-     * @param  string $key
-     * @return boolean      
+     * @param string $key
+     *
+     * @return bool
      */
     public function __isset($key)
     {
@@ -160,7 +162,7 @@ class JsonColumnValue
     /**
      * Remove a key.
      *
-     * @param  string $key
+     * @param string $key
      */
     public function __unset($key)
     {
