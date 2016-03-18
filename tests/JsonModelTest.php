@@ -164,7 +164,7 @@ class JsonModelTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * Assert that JSON attribute can have isset used
+     * Assert that JSON attribute can have isset used.
      */
     public function testIsset()
     {
@@ -180,7 +180,7 @@ class JsonModelTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * Assert that JSON attribute can have unset used
+     * Assert that JSON attribute can have unset used.
      */
     public function testUnset()
     {
