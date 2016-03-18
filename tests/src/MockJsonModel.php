@@ -26,14 +26,4 @@ class MockJsonModel extends Illuminate\Database\Eloquent\Model
     {
         $this->json_defaults[$column_name] = $defaults;
     }
-
-    public function getCustomGetAttribute()
-    {
-        return 'custom getter result';
-    }
-
-    public function setCustomSetAttribute($value)
-    {
-        $this->setJsonAttribute($this->jsonAttributes['custom_set'], 'custom_set', "custom {$value}");
-    }
 }
