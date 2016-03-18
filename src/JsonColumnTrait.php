@@ -28,6 +28,13 @@ trait JsonColumnTrait
     private $json_defaults = [];
 
     /**
+     * Stores options for each JSON attribute
+     *
+     * @var array
+     */
+    private $json_options = [];
+
+    /**
      * Create a new model instance that is existing.
      * Overrides parent to set Json columns.
      *
@@ -76,7 +83,8 @@ trait JsonColumnTrait
             $value = '';
         }
         $defaults = (!empty($this->json_defaults[$column_name])) ? $this->json_defaults[$column_name] : [];
-        $this->json_values[$column_name] = new JsonColumnValue($value, $defaults);
+        $options = (!empty($this->json_options[$column_name])) ? $this->json_options[$column_name] : [];
+        $this->json_values[$column_name] = new JsonColumnValue($value, $defaults, $options);
         $json_column_access = function &($column_name) {
             return $this->json_values[$column_name];
         };

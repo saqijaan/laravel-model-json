@@ -19,14 +19,30 @@ class JsonColumnValue
     private static $original_data = [];
 
     /**
+     * Holds specific defaults
+     *
+     * @var array
+     */
+    private static $defaults = [];
+
+    /**
+     * Holds specific options to internally deal with values
+     *
+     * @var array
+     */
+    private static $options = [];
+
+    /**
      * Add the data to the object.
      *
      * @return array
      */
-    public function __construct(&$attribute_value, $defaults)
+    public function __construct(&$attribute_value, $defaults, $options)
     {
         self::$original_value = &$attribute_value;
         self::$original_data = (!is_array($attribute_value)) ? json_decode(self::$original_value, true) : self::$original_value;
+        self::$defaults = $defaults;
+        self::$options = $options;
         foreach (self::$original_data as $key => $value) {
             $this->$key = $value;
             unset($value);
@@ -95,13 +111,27 @@ class JsonColumnValue
     {
         $dirty = [];
         foreach ($this->getCurrent() as $key => $value) {
-            if (array_key_exists($key, self::$original_data)
+
+            // Value is a default value and `no_saving_default_values` option has been enabled
+            if (array_key_exists('no_saving_default_values', self::$options)
+                && self::$options['no_saving_default_values']
+                && array_key_exists($key, self::$defaults)
+                && self::$defaults[$key] === $value) {
+                // Do nothing
+            }
+
+            // Existing value has changed
+            elseif (array_key_exists($key, self::$original_data)
                 && self::$original_data[$key] !== $value) {
                 $dirty[$key] = $value;
-            } elseif (!array_key_exists($key, self::$original_data)) {
+            }
+
+            // New value that has been assigned
+            elseif (!array_key_exists($key, self::$original_data)) {
                 $dirty[$key] = $value;
             }
         }
+
         return $dirty;
     }
 

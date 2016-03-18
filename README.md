@@ -54,3 +54,10 @@ protected $json_defaults = [
 
 When a save event has been called, the trait sets the original attribute value with the latest JSON encoded value.
 
+If you have used defaults, you can stop these from being saved to the database by setting the option `no_saving_default_values` to true for the specific json column
+
+```
+protected $json_options = [
+    'settings' => ['no_saving_default_values' => true]
+];
+```
