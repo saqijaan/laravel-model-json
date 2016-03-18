@@ -9,28 +9,14 @@ class JsonColumnValue
      *
      * @var string
      */
-    private $original_value = '';
-
-    /**
-     * Holds the current data.
-     *
-     * @var array
-     */
-    private $data = [];
+    private static $original_value = '';
 
     /**
      * Holds the original data provided by the model.
      *
      * @var array
      */
-    private $original_data = [];
-
-    /**
-     * Holds the defaults.
-     *
-     * @var array
-     */
-    private $defaults = [];
+    private static $original_data = [];
 
     /**
      * Add the data to the object.
@@ -39,16 +25,14 @@ class JsonColumnValue
      */
     public function __construct(&$attribute_value, $defaults)
     {
-        $this->original_value = &$attribute_value;
-        $this->defaults = $defaults;
-        $this->data = (!is_array($attribute_value)) ? json_decode($this->original_value, true) : $this->original_value;
-        $this->original_data = $this->data;
-        foreach ($this->data as $key => &$value) {
-            $this->$key = &$value;
+        self::$original_value = &$attribute_value;
+        self::$original_data = (!is_array($attribute_value)) ? json_decode(self::$original_value, true) : self::$original_value;
+        foreach (self::$original_data as $key => $value) {
+            $this->$key = $value;
             unset($value);
         }
-        foreach ($this->defaults as $key => $value) {
-            if (!isset($this->data[$key])) {
+        foreach ($defaults as $key => $value) {
+            if (!isset($this->$key)) {
                 $this->$key = $value;
             }
         }
@@ -65,9 +49,9 @@ class JsonColumnValue
     public function getOriginal($key = null, $default = null)
     {
         if ($key === null) {
-            return $this->original_data;
-        } elseif (array_key_exists($key, $this->original_data)) {
-            return $this->original_data[$key];
+            return self::$original_data;
+        } elseif (array_key_exists($key, self::$original_data)) {
+            return self::$original_data[$key];
         }
 
         return $default;
@@ -80,7 +64,11 @@ class JsonColumnValue
      */
     public function getCurrent()
     {
-        return $this->data;
+        $data = [];
+        foreach (get_object_vars($this) as $key => $value) {
+            $data[$key] = $value;
+        }
+        return $data;
     }
 
     /**
@@ -92,10 +80,10 @@ class JsonColumnValue
     {
         $dirty = $this->getDirty();
         if (count($dirty)) {
-            $this->original_value = $this->__toString();
+            self::$original_value = $this->__toString();
         }
 
-        return $this->original_value;
+        return self::$original_value;
     }
 
     /**
@@ -106,16 +94,14 @@ class JsonColumnValue
     public function getDirty()
     {
         $dirty = [];
-        foreach ($this->data as $key => $value) {
-            if (array_key_exists($key, $this->original_data)
-                && $this->original_data[$key] != $value) {
+        foreach ($this->getCurrent() as $key => $value) {
+            if (array_key_exists($key, self::$original_data)
+                && self::$original_data[$key] !== $value) {
                 $dirty[$key] = $value;
-            } elseif (!array_key_exists($key, $this->original_data)) {
+            } elseif (!array_key_exists($key, self::$original_data)) {
                 $dirty[$key] = $value;
             }
         }
-        $this->original_value = (string) $this;
-
         return $dirty;
     }
 
@@ -127,10 +113,28 @@ class JsonColumnValue
      */
     public function __set($key, $value)
     {
-        if (!array_key_exists($key, $this->data)) {
-            $this->data[$key] = $value;
-            $this->{$key} = &$this->data[$key];
-        }
+        $this->$key = $value;
+    }
+
+    /**
+     * Check if key exists.
+     *
+     * @param  string $key
+     * @return boolean      
+     */
+    public function __isset($key)
+    {
+        return isset($this->$key);
+    }
+
+    /**
+     * Remove a key.
+     *
+     * @param  string $key
+     */
+    public function __unset($key)
+    {
+        unset($this->$key);
     }
 
     /**
@@ -140,6 +144,6 @@ class JsonColumnValue
      */
     public function __toString()
     {
-        return json_encode($this->data);
+        return json_encode($this->getCurrent());
     }
 }

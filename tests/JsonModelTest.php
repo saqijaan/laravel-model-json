@@ -110,7 +110,8 @@ class JsonModelTest extends PHPUnit_Framework_TestCase
         $this->assertArrayNotHasKey('foo', $mock->getDirty(true));
 
         $mock->testColumn()->foo = 'bar2';
-        // This should not be dirty
+
+        // This should be dirty
         $this->assertArrayHasKey('testColumn', $mock->getDirty(true));
         $this->assertArrayHasKey('testColumn.foo', $mock->getDirty(true));
     }
@@ -134,11 +135,13 @@ class JsonModelTest extends PHPUnit_Framework_TestCase
 
         $mock->testColumn()->foo = 'bar2';
         $mock->testColumn()->foo2 = 'bar2';
-        $mock->testColumn()->foo3 = []; // We need to make it so we don't have to do this
+
+        // This should be dirty
+        $this->assertArrayHasKey('testColumn.foo2', $mock->getDirty(true));
+
+        // Check assigning to a new variable with a multidimensional array
         $mock->testColumn()->foo3['foo5'] = 'bar3';
 
-        // This should not be dirty
-        $this->assertArrayHasKey('testColumn.foo2', $mock->getDirty(true));
         $this->assertArrayHasKey('testColumn.foo3', $mock->getDirty(true));
         $this->assertArrayHasKey('foo5', $mock->getDirty(true)['testColumn.foo3']);
     }
@@ -158,5 +161,39 @@ class JsonModelTest extends PHPUnit_Framework_TestCase
         $this->assertArrayHasKey('bar2', $mock->toArray()['testColumn']);
         $this->assertEquals($mock->testColumn()->bar2, 'bar3');
         $this->assertEquals($mock->testColumn()->bar3, 'bar4');
+    }
+
+    /**
+     * Assert that JSON attribute can have isset used
+     */
+    public function testIsset()
+    {
+        // Mock the model with data
+        $mock = new MockJsonModel();
+        $mock->setJsonColumns(['testColumn']);
+        $mock->setCastsColumns(['testColumn' => 'json']);
+        $mock->setAttribute('testColumn', json_encode(['foo' => 'bar', 'foo2' => ['bar2' => 'bar3']]));
+
+        $this->assertTrue(isset($mock->testColumn()->foo));
+        $this->assertFalse(isset($mock->testColumn()->foo3));
+        $this->assertTrue(isset($mock->testColumn()->foo2['bar2']));
+    }
+
+    /**
+     * Assert that JSON attribute can have unset used
+     */
+    public function testUnset()
+    {
+        // Mock the model with data
+        $mock = new MockJsonModel();
+        $mock->setJsonColumns(['testColumn']);
+        $mock->setCastsColumns(['testColumn' => 'json']);
+        $mock->setAttribute('testColumn', json_encode(['foo' => 'bar', 'foo2' => ['bar2' => 'bar3']]));
+
+        unset($mock->testColumn()->foo);
+        unset($mock->testColumn()->foo2['bar2']);
+
+        $this->assertArrayNotHasKey('foo', $mock->toArray()['testColumn']);
+        $this->assertArrayNotHasKey('bar2', $mock->toArray()['testColumn']['foo2']);
     }
 }
