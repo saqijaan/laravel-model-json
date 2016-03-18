@@ -9,28 +9,28 @@ class JsonColumnValue
      *
      * @var string
      */
-    private static $original_value = '';
+    private $internal_original_value = '';
 
     /**
      * Holds the original data provided by the model.
      *
      * @var array
      */
-    private static $original_data = [];
+    private $internal_original_data = [];
 
     /**
      * Holds specific defaults.
      *
      * @var array
      */
-    private static $defaults = [];
+    private $internal_defaults = [];
 
     /**
      * Holds specific options to internally deal with values.
      *
      * @var array
      */
-    private static $options = [];
+    private $internal_options = [];
 
     /**
      * Add the data to the object.
@@ -39,11 +39,11 @@ class JsonColumnValue
      */
     public function __construct(&$attribute_value, $defaults, $options)
     {
-        self::$original_value = &$attribute_value;
-        self::$original_data = (!is_array($attribute_value)) ? json_decode(self::$original_value, true) : self::$original_value;
-        self::$defaults = $defaults;
-        self::$options = $options;
-        foreach (self::$original_data as $key => $value) {
+        $this->internal_original_value = &$attribute_value;
+        $this->internal_original_data = (!is_array($attribute_value)) ? json_decode($this->internal_original_value, true) : $this->internal_original_value;
+        $this->internal_defaults = $defaults;
+        $this->internal_options = $options;
+        foreach ($this->internal_original_data as $key => $value) {
             $this->$key = $value;
             unset($value);
         }
@@ -65,9 +65,9 @@ class JsonColumnValue
     public function getOriginal($key = null, $default = null)
     {
         if ($key === null) {
-            return self::$original_data;
-        } elseif (array_key_exists($key, self::$original_data)) {
-            return self::$original_data[$key];
+            return $this->internal_original_data;
+        } elseif (array_key_exists($key, $this->internal_original_data)) {
+            return $this->internal_original_data[$key];
         }
 
         return $default;
@@ -82,7 +82,9 @@ class JsonColumnValue
     {
         $data = [];
         foreach (get_object_vars($this) as $key => $value) {
-            $data[$key] = $value;
+            if (substr($key, 0, 8) !== 'internal') {
+                $data[$key] = $value;
+            }
         }
 
         return $data;
@@ -97,10 +99,10 @@ class JsonColumnValue
     {
         $dirty = $this->getDirty();
         if (count($dirty)) {
-            self::$original_value = $this->__toString();
+            $this->internal_original_value = $this->__toString();
         }
 
-        return self::$original_value;
+        return $this->internal_original_value;
     }
 
     /**
@@ -114,21 +116,21 @@ class JsonColumnValue
         foreach ($this->getCurrent() as $key => $value) {
 
             // Value is a default value and `no_saving_default_values` option has been enabled
-            if (array_key_exists('no_saving_default_values', self::$options)
-                && self::$options['no_saving_default_values']
-                && array_key_exists($key, self::$defaults)
-                && self::$defaults[$key] === $value) {
+            if (array_key_exists('no_saving_default_values', $this->internal_options)
+                && $this->internal_options['no_saving_default_values']
+                && array_key_exists($key, $this->internal_defaults)
+                && $this->internal_defaults[$key] === $value) {
                 // Do nothing
             }
 
             // Existing value has changed
-            elseif (array_key_exists($key, self::$original_data)
-                && self::$original_data[$key] !== $value) {
+            elseif (array_key_exists($key, $this->internal_original_data)
+                && $this->internal_original_data[$key] !== $value) {
                 $dirty[$key] = $value;
             }
 
             // New value that has been assigned
-            elseif (!array_key_exists($key, self::$original_data)) {
+            elseif (!array_key_exists($key, $this->internal_original_data)) {
                 $dirty[$key] = $value;
             }
         }
