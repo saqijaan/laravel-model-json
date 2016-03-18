@@ -8,7 +8,7 @@ Adds support for the JSON datatype column for models provided by the [Eloquent O
 
 Require this package in your `composer.json` file:
 
-`"bluora/laravel-model-json-column": "dev-master"`
+`"bluora/laravel-model-json-column": "~1.0"`
 
 Then run `composer update` to download the package to your vendor directory.
 
@@ -54,3 +54,10 @@ protected $json_defaults = [
 
 When a save event has been called, the trait sets the original attribute value with the latest JSON encoded value.
 
+If you have used defaults, you can stop these from being saved to the database by setting the option `no_saving_default_values` to true for the specific json column
+
+```
+protected $json_options = [
+    'settings' => ['no_saving_default_values' => true]
+];
+```

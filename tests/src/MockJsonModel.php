@@ -26,4 +26,9 @@ class MockJsonModel extends Illuminate\Database\Eloquent\Model
     {
         $this->json_defaults[$column_name] = $defaults;
     }
+
+    public function setJsonColumnOptions($column_name, $options)
+    {
+        $this->json_options[$column_name] = $options;
+    }
 }

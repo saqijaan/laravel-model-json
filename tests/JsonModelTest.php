@@ -164,7 +164,26 @@ class JsonModelTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * Assert that JSON attribute can have isset used
+     * Assert that JSON attribute can set defaults.
+     */
+    public function testNoSavingDefaults()
+    {
+        // Mock the model with data
+        $mock = new MockJsonModel();
+        $mock->setJsonColumns(['testColumn']);
+        $mock->setCastsColumns(['testColumn' => 'json']);
+        $mock->setJsonColumnOptions('testColumn', ['no_saving_default_values' => true]);
+        $mock->setJsonColumnDefaults('testColumn', ['foo2' => 'bar2', 'foo3' => 'bar3']);
+        $mock->setAttribute('testColumn', json_encode(['foo' => 'bar']));
+
+        $mock->testColumn()->foo3 = 'bar4';
+
+        $this->assertArrayNotHasKey('testColumn.foo2', $mock->getDirty(true));
+        $this->assertArrayHasKey('testColumn.foo3', $mock->getDirty(true));
+    }
+
+    /**
+     * Assert that JSON attribute can have isset used.
      */
     public function testIsset()
     {
@@ -180,7 +199,7 @@ class JsonModelTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * Assert that JSON attribute can have unset used
+     * Assert that JSON attribute can have unset used.
      */
     public function testUnset()
     {
