@@ -28,7 +28,7 @@ trait JsonColumnTrait
     private $json_defaults = [];
 
     /**
-     * Stores options for each JSON attribute
+     * Stores options for each JSON attribute.
      *
      * @var array
      */
@@ -185,7 +185,7 @@ trait JsonColumnTrait
     {
         if (!empty($this->json_columns)) {
             foreach ($this->json_columns as $column_name) {
-                $this->attributes[$column_name] = (string)$this->json_values[$column_name];
+                $this->attributes[$column_name] = (string) $this->json_values[$column_name];
             }
         }
 
