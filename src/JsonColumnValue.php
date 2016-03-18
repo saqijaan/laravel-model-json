@@ -68,6 +68,7 @@ class JsonColumnValue
         foreach (get_object_vars($this) as $key => $value) {
             $data[$key] = $value;
         }
+
         return $data;
     }
 
@@ -102,6 +103,7 @@ class JsonColumnValue
                 $dirty[$key] = $value;
             }
         }
+
         return $dirty;
     }
 
@@ -119,8 +121,9 @@ class JsonColumnValue
     /**
      * Check if key exists.
      *
-     * @param  string $key
-     * @return boolean      
+     * @param string $key
+     *
+     * @return bool
      */
     public function __isset($key)
     {
@@ -130,7 +133,7 @@ class JsonColumnValue
     /**
      * Remove a key.
      *
-     * @param  string $key
+     * @param string $key
      */
     public function __unset($key)
     {

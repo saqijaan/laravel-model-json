@@ -177,7 +177,7 @@ trait JsonColumnTrait
     {
         if (!empty($this->json_columns)) {
             foreach ($this->json_columns as $column_name) {
-                $this->attributes[$column_name] = (string)$this->json_values[$column_name];
+                $this->attributes[$column_name] = (string) $this->json_values[$column_name];
             }
         }
 
