@@ -8,7 +8,7 @@ Adds support for the JSON datatype column for models provided by the [Eloquent O
 
 Require this package in your `composer.json` file:
 
-`"bluora/laravel-model-json-column": "dev-master"`
+`"bluora/laravel-model-json-column": "~1.0"`
 
 Then run `composer update` to download the package to your vendor directory.
 
