@@ -54,6 +54,7 @@ class JsonModelTest extends PHPUnit_Framework_TestCase
         $mock->setJsonColumns(['testColumn']);
         $mock->setCastsColumns(['testColumn' => 'json']);
         $mock->setAttribute('testColumn', json_encode(['foo' => 'bar']));
+        $mock->setAttribute('testColumn1', 'test');
 
         // Execute the insepect call
         $mock->inspectJson();
@@ -63,6 +64,7 @@ class JsonModelTest extends PHPUnit_Framework_TestCase
 
         // Assert that the column was properly made available and
         // contains the data we provided
+        $this->assertEquals($mock->testColumn1, 'test');
         $this->assertEquals($mock->testColumn()->foo, 'bar2');
         $this->assertEquals($mock->testColumn()->foo2, 'bar3');
         $this->assertArrayHasKey('foo2', $mock->toArray()['testColumn']);
