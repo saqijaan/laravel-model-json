@@ -26,6 +26,25 @@ class JsonModelTest extends PHPUnit_Framework_TestCase
     }
 
     /**
+     * Assert that defined JSON attributes are made available.
+     */
+    public function testInspectJsonWithEmpty()
+    {
+        // Mock the model with data
+        $mock = new MockJsonModel();
+        $mock->setJsonColumns(['testColumn']);
+        $mock->setCastsColumns(['testColumn' => 'json']);
+        $mock->setAttribute('testColumn', '');
+
+        // Execute the inspect call
+        $mock->inspectJson();
+
+        // Assert that the column was properly made available and
+        // contains the data we provided
+        $this->assertTrue(is_callable([$mock, 'testColumn']));
+    }
+
+    /**
      * Assert that JSON attributes can be changed, and new attribute added.
      */
     public function testSetAttribute()

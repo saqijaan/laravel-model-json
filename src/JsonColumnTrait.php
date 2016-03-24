@@ -80,7 +80,7 @@ trait JsonColumnTrait
     public function processJson($column_name, &$value)
     {
         if (empty($value)) {
-            $value = '';
+            $value = [];
         }
         $defaults = (!empty($this->json_defaults[$column_name])) ? $this->json_defaults[$column_name] : [];
         $options = (!empty($this->json_options[$column_name])) ? $this->json_options[$column_name] : [];
