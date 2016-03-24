@@ -116,6 +116,24 @@ class JsonModelTest extends PHPUnit_Framework_TestCase
     /**
      * Assert that JSON attribute reports the changes correctly.
      */
+    public function testDirty()
+    {
+        // Mock the model with data
+        $mock = new MockJsonModel();
+        $mock->setJsonColumns(['testColumn']);
+        $mock->setCastsColumns(['testColumn' => 'json']);
+        $mock->setAttribute('testColumn', json_encode(['foo' => 'bar']));
+        $mock->setAttribute('foo', 'bar');
+        $mock->foo = 'bar2';
+        $mock->testColumn()->foo = 'bar2';
+
+        $this->assertArrayHasKey('foo', $mock->getDirty());
+        $this->assertArrayHasKey('testColumn', $mock->getDirty());
+    }
+
+    /**
+     * Assert that JSON attribute reports the changes correctly.
+     */
     public function testDirtyJson()
     {
         // Mock the model with data
