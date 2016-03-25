@@ -116,6 +116,33 @@ class JsonModelTest extends PHPUnit_Framework_TestCase
     /**
      * Assert that JSON attribute reports the changes correctly.
      */
+    public function testOriginal()
+    {
+        // Mock the model with data
+        $mock = new MockJsonModel();
+        $mock->setJsonColumns(['testColumn']);
+        $mock->setCastsColumns(['testColumn' => 'json']);
+        $mock->setAttribute('testColumn', json_encode(['foo' => 'bar']));
+        $mock->setAttribute('foo', 'bar');
+        $mock->syncOriginalAttribute('testColumn');
+        $mock->syncOriginalAttribute('foo');
+
+        $mock->foo = 'bar2';
+        $mock->testColumn()->foo = 'bar2';
+
+        $this->assertEquals($mock->getOriginal('foo'), 'bar');
+        $this->assertEquals($mock->getOriginal('testColumn'), '{"foo":"bar"}');
+        $this->assertEquals($mock->getOriginal('testColumn.foo'), 'bar');
+        $this->assertArrayHasKey('foo', $mock->getOriginal());
+        $this->assertArrayHasKey('testColumn', $mock->getOriginal());
+        $this->assertEquals($mock->getOriginal()['foo'], 'bar');
+        $this->assertEquals($mock->getOriginal()['testColumn']['foo'], 'bar');
+        $this->assertArrayHasKey('testColumn', $mock->getDirty());
+    }
+
+    /**
+     * Assert that JSON attribute reports the changes correctly.
+     */
     public function testDirty()
     {
         // Mock the model with data
