@@ -2,7 +2,6 @@
 
 class JsonModelTest extends PHPUnit_Framework_TestCase
 {
-
     /**
      * Assert that `newFromBuilder` correctly sets up the model, including JSON attributes.
      */
