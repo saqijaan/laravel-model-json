@@ -154,6 +154,7 @@ class JsonModelTest extends PHPUnit_Framework_TestCase
         $this->assertEquals($mock->getOriginal('foo'), 'bar');
         $this->assertEquals($mock->getOriginal('testColumn'), '{"foo":"bar"}');
         $this->assertEquals($mock->getOriginal('testColumn.foo'), 'bar');
+        $this->assertEquals($mock->getOriginal('testColumn1.foo'), null);
         $this->assertArrayHasKey('foo', $mock->getOriginal());
         $this->assertArrayHasKey('testColumn', $mock->getOriginal());
         $this->assertEquals($mock->getOriginal()['foo'], 'bar');

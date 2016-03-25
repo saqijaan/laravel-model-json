@@ -132,7 +132,7 @@ trait JsonColumnTrait
             $key_array = explode('.', $key, 2);
             if (count($key_array) > 1) {
                 list($column_name, $json_key) = $key_array;
-                if ($json_key != '' && array_key_exists($column_name, $this->json_values)) {
+                if (array_key_exists($column_name, $this->json_values)) {
                     return $this->json_values[$column_name]->getOriginal($json_key, $default);
                 }
 
