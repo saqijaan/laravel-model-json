@@ -4,7 +4,7 @@ class JsonModelTest extends PHPUnit_Framework_TestCase
 {
 
     /**
-     * Assert that JSON attribute reports the changes correctly.
+     * Assert that `newFromBuilder` correctly sets up the model, including JSON attributes.
      */
     public function testNewFromBuilder()
     {
@@ -24,7 +24,7 @@ class JsonModelTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * Assert that defined JSON attributes are made available.
+     * Assert that the inspection function correctly sets up the JSON attributes.
      */
     public function testInspectJson()
     {
@@ -47,7 +47,7 @@ class JsonModelTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * Assert that defined JSON attributes are made available.
+     * Assert that the an empty JSON value is properly processed.
      */
     public function testInspectJsonWithEmpty()
     {
@@ -135,7 +135,7 @@ class JsonModelTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * Assert that JSON attribute reports the changes correctly.
+     * Assert that we can get the original model attributes values.
      */
     public function testOriginal()
     {
@@ -162,7 +162,7 @@ class JsonModelTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * Assert that JSON attribute reports the changes correctly.
+     * Assert that attributes (including JSON attributes) report changes correctly.
      */
     public function testDirty()
     {
@@ -204,7 +204,7 @@ class JsonModelTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * Assert that JSON attribute reports changes correctly.
+     * Assert that JSON attribute reports the changes correctly with multiple dimensions.
      */
     public function testDirtyJsonMultiDimension()
     {
