@@ -25,14 +25,14 @@ trait JsonColumnTrait
      *
      * @var array
      */
-    private $json_defaults = [];
+    //private $json_defaults = [];
 
     /**
      * Stores options for each JSON attribute.
      *
      * @var array
      */
-    private $json_options = [];
+    //private $json_options = [];
 
     /**
      * Create a new model instance that is existing.
