@@ -5,6 +5,8 @@ class MockJsonModel extends Illuminate\Database\Eloquent\Model
     use \ModelJsonColumn\JsonColumnTrait;
 
     protected $json_columns;
+    protected $json_defaults;
+    protected $json_options;
 
     public function __construct(array $attributes = [])
     {
