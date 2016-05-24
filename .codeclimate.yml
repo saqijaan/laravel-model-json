@@ -11,6 +11,10 @@ engines:
     checks:
       Controversial/CamelCaseParameterName:
         enabled: false
+      Controversial/CamelCaseVariableName:
+        enabled: false
+      Controversial/CamelCasePropertyName:
+        enabled: false
     exclude_fingerprints:
     - c1a9f944467ad3a16d65c999ce8516be
     - d4dc8f156ce46dec5c22b27d6bbb611c

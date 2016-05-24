@@ -3,7 +3,27 @@
 class JsonModelTest extends PHPUnit_Framework_TestCase
 {
     /**
-     * Assert that defined JSON attributes are made available.
+     * Assert that `newFromBuilder` correctly sets up the model, including JSON attributes.
+     */
+    public function testNewFromBuilder()
+    {
+        // Mock the model with data
+        $mock = new MockJsonModel();
+        $mock->setJsonColumns(['testColumn']);
+        $mock->setCastsColumns(['testColumn' => 'json']);
+        $mock->setAttribute('testColumn', json_encode(['foo' => 'bar']));
+        $model = $mock->newFromBuilder(['foo' => 'bar']);
+
+        $this->assertEquals($model->foo, 'bar');
+        $this->assertTrue(is_callable([$mock, 'testColumn']));
+        $this->assertEquals($mock->testColumn()->foo, 'bar');
+        $this->assertArrayHasKey('testColumn', $mock->toArray());
+        $this->assertTrue(is_array($mock->toArray()['testColumn']));
+        $this->assertContains('bar', $mock->toArray()['testColumn']);
+    }
+
+    /**
+     * Assert that the inspection function correctly sets up the JSON attributes.
      */
     public function testInspectJson()
     {
@@ -26,6 +46,25 @@ class JsonModelTest extends PHPUnit_Framework_TestCase
     }
 
     /**
+     * Assert that the an empty JSON value is properly processed.
+     */
+    public function testInspectJsonWithEmpty()
+    {
+        // Mock the model with data
+        $mock = new MockJsonModel();
+        $mock->setJsonColumns(['testColumn']);
+        $mock->setCastsColumns(['testColumn' => 'json']);
+        $mock->setAttribute('testColumn', '');
+
+        // Execute the inspect call
+        $mock->inspectJson();
+
+        // Assert that the column was properly made available and
+        // contains the data we provided
+        $this->assertTrue(is_callable([$mock, 'testColumn']));
+    }
+
+    /**
      * Assert that JSON attributes can be changed, and new attribute added.
      */
     public function testSetAttribute()
@@ -35,6 +74,7 @@ class JsonModelTest extends PHPUnit_Framework_TestCase
         $mock->setJsonColumns(['testColumn']);
         $mock->setCastsColumns(['testColumn' => 'json']);
         $mock->setAttribute('testColumn', json_encode(['foo' => 'bar']));
+        $mock->setAttribute('testColumn1', 'test');
 
         // Execute the insepect call
         $mock->inspectJson();
@@ -44,6 +84,7 @@ class JsonModelTest extends PHPUnit_Framework_TestCase
 
         // Assert that the column was properly made available and
         // contains the data we provided
+        $this->assertEquals($mock->testColumn1, 'test');
         $this->assertEquals($mock->testColumn()->foo, 'bar2');
         $this->assertEquals($mock->testColumn()->foo2, 'bar3');
         $this->assertArrayHasKey('foo2', $mock->toArray()['testColumn']);
@@ -93,6 +134,52 @@ class JsonModelTest extends PHPUnit_Framework_TestCase
     }
 
     /**
+     * Assert that we can get the original model attributes values.
+     */
+    public function testOriginal()
+    {
+        // Mock the model with data
+        $mock = new MockJsonModel();
+        $mock->setJsonColumns(['testColumn']);
+        $mock->setCastsColumns(['testColumn' => 'json']);
+        $mock->setAttribute('testColumn', json_encode(['foo' => 'bar']));
+        $mock->setAttribute('foo', 'bar');
+        $mock->syncOriginalAttribute('testColumn');
+        $mock->syncOriginalAttribute('foo');
+
+        $mock->foo = 'bar2';
+        $mock->testColumn()->foo = 'bar2';
+
+        $this->assertEquals($mock->getOriginal('foo'), 'bar');
+        $this->assertEquals($mock->getOriginal('testColumn'), '{"foo":"bar"}');
+        $this->assertEquals($mock->getOriginal('testColumn.foo'), 'bar');
+        $this->assertEquals($mock->getOriginal('testColumn1.foo'), null);
+        $this->assertArrayHasKey('foo', $mock->getOriginal());
+        $this->assertArrayHasKey('testColumn', $mock->getOriginal());
+        $this->assertEquals($mock->getOriginal()['foo'], 'bar');
+        $this->assertEquals($mock->getOriginal()['testColumn']['foo'], 'bar');
+        $this->assertArrayHasKey('testColumn', $mock->getDirty());
+    }
+
+    /**
+     * Assert that attributes (including JSON attributes) report changes correctly.
+     */
+    public function testDirty()
+    {
+        // Mock the model with data
+        $mock = new MockJsonModel();
+        $mock->setJsonColumns(['testColumn']);
+        $mock->setCastsColumns(['testColumn' => 'json']);
+        $mock->setAttribute('testColumn', json_encode(['foo' => 'bar']));
+        $mock->setAttribute('foo', 'bar');
+        $mock->foo = 'bar2';
+        $mock->testColumn()->foo = 'bar2';
+
+        $this->assertArrayHasKey('foo', $mock->getDirty());
+        $this->assertArrayHasKey('testColumn', $mock->getDirty());
+    }
+
+    /**
      * Assert that JSON attribute reports the changes correctly.
      */
     public function testDirtyJson()
@@ -117,7 +204,7 @@ class JsonModelTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * Assert that JSON attribute reports changes correctly.
+     * Assert that JSON attribute reports the changes correctly with multiple dimensions.
      */
     public function testDirtyJsonMultiDimension()
     {

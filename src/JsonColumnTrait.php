@@ -25,14 +25,14 @@ trait JsonColumnTrait
      *
      * @var array
      */
-    private $json_defaults = [];
+    //private $json_defaults = [];
 
     /**
      * Stores options for each JSON attribute.
      *
      * @var array
      */
-    private $json_options = [];
+    //private $json_options = [];
 
     /**
      * Create a new model instance that is existing.
@@ -80,7 +80,7 @@ trait JsonColumnTrait
     public function processJson($column_name, &$value)
     {
         if (empty($value)) {
-            $value = '';
+            $value = [];
         }
         $defaults = (!empty($this->json_defaults[$column_name])) ? $this->json_defaults[$column_name] : [];
         $options = (!empty($this->json_options[$column_name])) ? $this->json_options[$column_name] : [];
@@ -132,7 +132,7 @@ trait JsonColumnTrait
             $key_array = explode('.', $key, 2);
             if (count($key_array) > 1) {
                 list($column_name, $json_key) = $key_array;
-                if ($json_key != '' && array_key_exists($column_name, $this->json_values)) {
+                if (array_key_exists($column_name, $this->json_values)) {
                     return $this->json_values[$column_name]->getOriginal($json_key, $default);
                 }
 

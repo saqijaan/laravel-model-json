@@ -1,4 +1,4 @@
-# Laravel Eloquent Model - JSON column support
+# JSON column support for a Laravel Eloquent Model
 
 [![Build Status](https://travis-ci.org/bluora/laravel-model-json-column.svg?branch=master)](https://travis-ci.org/bluora/laravel-model-json-column) [![StyleCI](https://styleci.io/repos/53236988/shield)](https://styleci.io/repos/53236988) [![Test Coverage](https://codeclimate.com/github/bluora/laravel-model-json-column/badges/coverage.svg)](https://codeclimate.com/github/bluora/laravel-model-json-column/coverage) [![Code Climate](https://codeclimate.com/github/bluora/laravel-model-json-column/badges/gpa.svg)](https://codeclimate.com/github/bluora/laravel-model-json-column)
 
@@ -31,11 +31,49 @@ class User extends Model
 }
 ```
 
-The JSON column values can then be get or set via an object property:-
-(the value can be an array or an object too!)
+The JSON column values can then be retrieved or set via an object property.
+
+Let's say we have an array of data stored in the `settings` JSON column:
 
 ```php
-$user->settings()->showProfilePicture;
+['showProfilePicture' => true, 'options' => ['option1' => 'red']];
+```
+
+Getting these values is as simple as:
+```php
+echo $user->settings()->showProfilePicture."\n";
+echo $user->settings()->options['option1'];
+```
+
+Would output:
+```
+1
+red
+```
+
+You can update any variable or add a new one:
+```php
+$user->settings()->options['option2'] = 1;
+$user->save();
+```
+
+And would update the JSON object with the following array:
+```php
+['showProfilePicture' => true, 'options' => ['option1' => 'red', 'option2' => 1]];
+```
+
+Calling `getDirty` with `true` will provide changes using dot notation.
+
+```php
+print_r($user->getDirty(true));
+```
+
+Would output:
+```
+array(
+    'settings' => "{"showProfilePicture":true,"options":{"option1":"red","option2":1}}",
+    'settings.options' => array('option2' => 1)
+)
 ```
 
 ### Defaults
