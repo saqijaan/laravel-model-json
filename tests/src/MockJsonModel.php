@@ -2,7 +2,7 @@
 
 class MockJsonModel extends Illuminate\Database\Eloquent\Model
 {
-    use \ModelJsonColumn\JsonColumnTrait;
+    use \Bluora\LaravelModelJson\JsonColumnTrait;
 
     protected $json_columns;
     protected $json_defaults;

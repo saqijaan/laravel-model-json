@@ -1,6 +1,6 @@
 <?php
 
-namespace ModelJsonColumn;
+namespace Bluora\LaravelModelJson;
 
 class JsonColumnValue
 {
