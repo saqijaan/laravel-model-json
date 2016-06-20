@@ -22,7 +22,7 @@
     },
     "autoload": {
         "psr-4": {
-            "Bluora//LaravelModelJson\\": "src/"
+            "Bluora\\LaravelModelJson\\": "src/"
         }
     }
 }
