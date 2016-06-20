@@ -157,7 +157,9 @@ trait JsonColumnTrait
         if (!empty($this->json_values)) {
             foreach ($this->json_values as $column_name => $json_data) {
                 if (count($json_data->getDirty())) {
-                    $dirty[$column_name] = (string) $json_data;
+                    $dirty[$column_name] = (String) $json_data;
+                } else {
+                    unset($dirty[$column_name]);
                 }
             }
         }
