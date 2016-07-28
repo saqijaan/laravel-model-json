@@ -6,7 +6,11 @@ Adds support for the JSON datatype column for models provided by the [Eloquent M
 
 ## Installation
 
-Require this package in your `composer.json` file:
+```
+composer require bluora/laravel-model-json ~1.0
+```
+
+You can also add this package to your `composer.json` file:
 
 `"bluora/laravel-model-json": "~1.0"`
 
