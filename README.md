@@ -1,4 +1,4 @@
-# Provides JSON column support for for Laravel's Eloquent Model
+# Provides JSON column support for Laravel's Eloquent Model
 
 [![Build Status](https://travis-ci.org/bluora/laravel-model-json.svg?branch=master)](https://travis-ci.org/bluora/laravel-model-json) [![StyleCI](https://styleci.io/repos/53236988/shield)](https://styleci.io/repos/53236988) [![Test Coverage](https://codeclimate.com/github/bluora/laravel-model-json/badges/coverage.svg)](https://codeclimate.com/github/bluora/laravel-model-json/coverage) [![Code Climate](https://codeclimate.com/github/bluora/laravel-model-json/badges/gpa.svg)](https://codeclimate.com/github/bluora/laravel-model-json)
 
