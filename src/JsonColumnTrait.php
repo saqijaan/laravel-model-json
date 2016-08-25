@@ -7,6 +7,13 @@ use Closure;
 trait JsonColumnTrait
 {
     /**
+     * Holds a list of protected columns used by Illuminate\Database\Eloquent\Model.
+     *
+     * @var array
+     */
+    private static $protected_columns = [];
+
+    /**
      * Holds the referenced json data.
      *
      * @var array
@@ -33,6 +40,16 @@ trait JsonColumnTrait
      * @var array
      */
     //private $json_options = [];
+
+    /**
+     * Boot the events that apply which user is making the last event change.
+     *
+     * @return void
+     */
+    public static function bootJsonColumnTrait()
+    {
+       static::$protected_columns = array_keys(get_class_vars(__CLASS__));
+    }
 
     /**
      * Create a new model instance that is existing.
@@ -62,7 +79,9 @@ trait JsonColumnTrait
     {
         if (!empty($this->json_columns)) {
             foreach ($this->json_columns as $column_name) {
-                $this->processJson($column_name, $this->attributes[$column_name]);
+                if (!in_array($column_name, static::$protected_columns)) {
+                    $this->processJson($column_name, $this->attributes[$column_name]);
+                }
             }
         }
     }
@@ -84,11 +103,15 @@ trait JsonColumnTrait
         }
         $defaults = (!empty($this->json_defaults[$column_name])) ? $this->json_defaults[$column_name] : [];
         $options = (!empty($this->json_options[$column_name])) ? $this->json_options[$column_name] : [];
-        $this->json_values[$column_name] = new JsonColumnValue($value, $defaults, $options);
-        $json_column_access = function &($column_name) {
-            return $this->json_values[$column_name];
-        };
-        $this->json_methods[$column_name] = Closure::bind($json_column_access, $this, static::class);
+
+        // Only create the json value object if it hasn't been done already.
+        if (!isset($this->json_values[$column_name]) || !is_object($this->json_values[$column_name])) {
+            $this->json_values[$column_name] = new JsonColumnValue($value, $defaults, $options);
+            $json_column_access = function &($column_name) {
+                return $this->json_values[$column_name];
+            };
+            $this->json_methods[$column_name] = Closure::bind($json_column_access, $this, static::class);
+        }
     }
 
     /**
