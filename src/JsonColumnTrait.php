@@ -48,7 +48,7 @@ trait JsonColumnTrait
      */
     public static function bootJsonColumnTrait()
     {
-       static::$protected_columns = array_keys(get_class_vars(__CLASS__));
+        static::$protected_columns = array_keys(get_class_vars(__CLASS__));
     }
 
     /**
