@@ -76,6 +76,15 @@ array(
 )
 ```
 
+### NOTE
+
+If you use `findOrNew`, `firstOrNew`, `firstOrCreate`, or the `updateOrCreate` method, you should run the `inspectJson` method before using any JSON columns as the `newFromBuilder` method (which we override) is not called on new model objects.
+
+```php
+$model = Model::firstOrNew(['name' => 'example']);
+$model->inspectJson();
+```
+
 ### Defaults
 
 You can define default values for a json attribute by using the `$json_defaults` property on the model.
