@@ -103,11 +103,15 @@ trait JsonColumnTrait
         }
         $defaults = (!empty($this->json_defaults[$column_name])) ? $this->json_defaults[$column_name] : [];
         $options = (!empty($this->json_options[$column_name])) ? $this->json_options[$column_name] : [];
-        $this->json_values[$column_name] = new JsonColumnValue($value, $defaults, $options);
-        $json_column_access = function &($column_name) {
-            return $this->json_values[$column_name];
-        };
-        $this->json_methods[$column_name] = Closure::bind($json_column_access, $this, static::class);
+
+        // Only create the json value object if it hasn't been done already.
+        if (!isset($this->json_values[$column_name]) || !is_object($this->json_values[$column_name])) {
+            $this->json_values[$column_name] = new JsonColumnValue($value, $defaults, $options);
+            $json_column_access = function &($column_name) {
+                return $this->json_values[$column_name];
+            };
+            $this->json_methods[$column_name] = Closure::bind($json_column_access, $this, static::class);
+        }
     }
 
     /**
