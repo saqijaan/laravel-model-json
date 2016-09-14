@@ -54,16 +54,26 @@ trait JsonColumnTrait
          * Before model is saved, ensure the JSON columns are in a string format.
          */
         static::saving(function ($model) {
-            foreach ($model->getJsonColumns() as $column_name) {
-                if (is_array($model->$column_name)) {
-                    $model->$column_name = json_encode($model->$column_name);
-                } elseif (is_object($model->$column_name)) {
-                    $model->$column_name = (string) $model->$column_name;
-                } else {
-                    $model->$column_name = '{}';
+            $model->checkValuesUponSave();
+        });
+    }
+
+    /**
+     * Checks values and ensures the json values are in the correct format.
+     *
+     * @return void
+     */
+    public function checkValuesUponSave()
+    {
+        foreach ($this->getJsonColumns() as $column_name) {
+            if (isset($this->attributes[$column_name]) && !is_string($this->attributes[$column_name])) {
+                if (is_array($this->attributes[$column_name])) {
+                    $this->attributes[$column_name] = json_encode($this->attributes[$column_name]);
+                } elseif (is_object($this->attributes[$column_name])) {
+                   $this->attributes[$column_name] = (string) $this->attributes[$column_name];
                 }
             }
-        });
+        }
     }
 
     /**
@@ -157,9 +167,10 @@ trait JsonColumnTrait
             $this->attributes[$column_name] = $value;
             $this->processJson($column_name, $this->attributes[$column_name]);
 
-            return;
+            return $this;
         }
         parent::setAttribute($column_name, $value);
+        return $this;
     }
 
     /**
