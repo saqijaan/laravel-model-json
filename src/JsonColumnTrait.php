@@ -90,8 +90,8 @@ trait JsonColumnTrait
      */
     public function getJsonColumns()
     {
-        if (!empty($this->json_values)) {
-            return $this->json_values;
+        if (!empty($this->json_columns)) {
+            return $this->json_columns;
         }
 
         return [];
