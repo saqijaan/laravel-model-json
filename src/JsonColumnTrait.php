@@ -49,6 +49,21 @@ trait JsonColumnTrait
     public static function bootJsonColumnTrait()
     {
         static::$protected_columns = array_keys(get_class_vars(__CLASS__));
+
+        /**
+         * Before model is saved, ensure the JSON columns are in a string format.
+         */
+        static::saving(function ($model) {
+            foreach ($model->getJsonColumns() as $column_name) {
+                if (is_array($model->$column_name)) {
+                    $model->$column_name = json_encode($model->$column_name);
+                } elseif (is_object($model->$column_name)) {
+                    $model->$column_name = (string) $model->$column_name;
+                } else {
+                    $model->$column_name = '{}';
+                }
+            }
+        });
     }
 
     /**
@@ -66,6 +81,20 @@ trait JsonColumnTrait
         $model->inspectJson();
 
         return $model;
+    }
+
+    /**
+     * Get the array of columns that this trait should use.
+     *
+     * @return array
+     */
+    public function getJsonColumns()
+    {
+        if (!empty($this->json_values)) {
+            return $this->json_values;
+        }
+
+        return [];
     }
 
     /**
