@@ -70,7 +70,7 @@ trait JsonColumnTrait
                 if (is_array($this->attributes[$column_name])) {
                     $this->attributes[$column_name] = json_encode($this->attributes[$column_name]);
                 } elseif (is_object($this->attributes[$column_name])) {
-                   $this->attributes[$column_name] = (string) $this->attributes[$column_name];
+                    $this->attributes[$column_name] = (string) $this->attributes[$column_name];
                 }
             }
         }
@@ -170,6 +170,7 @@ trait JsonColumnTrait
             return $this;
         }
         parent::setAttribute($column_name, $value);
+
         return $this;
     }
 
