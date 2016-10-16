@@ -139,6 +139,32 @@ class JsonColumnValue
     }
 
     /**
+     * Set value.
+     *
+     * @param array $data
+     */
+    public function setValue($key, $value)
+    {
+        $this->$key = $value;
+    }
+
+    /**
+     * Set values.
+     *
+     * @param array $data
+     */
+    public function setValues($data)
+    {
+        if (!is_array($data)) {
+            return $this;
+        }
+
+        foreach ($data as $key => $value) {
+            $this->$key = $value;
+        }
+    }
+
+    /**
      * Track new column additions.
      *
      * @param string $key
@@ -147,6 +173,20 @@ class JsonColumnValue
     public function __set($key, $value)
     {
         $this->$key = $value;
+    }
+
+    /**
+     * Get a value.
+     *
+     * @param string $key
+     * @param mixed  $value
+     */
+    public function __get($key)
+    {
+        if (isset($this->$key)) {
+            return $this->$key;
+        }
+        return null;
     }
 
     /**
