@@ -181,12 +181,12 @@ class JsonColumnValue
      * @param string $key
      * @param mixed  $value
      */
-    public function __get($key)
+    public function &__get($key)
     {
-        if (isset($this->$key)) {
-            return $this->$key;
+        if (!isset($this->$key)) {
+            $this->$key = null;
         }
-        return null;
+        return $this->$key;
     }
 
     /**
