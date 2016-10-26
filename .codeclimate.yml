@@ -29,3 +29,6 @@ ratings:
   - "**.rb"
 exclude_paths:
 - tests/
+addons:
+    code_climate:
+        repo_token: 96e282452f449c6c76ba577b04d516f21f68613395c700c49ff50fbdd252b5f9
