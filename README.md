@@ -1,4 +1,4 @@
-# Provides JSON column support for Laravel's Eloquent Model
+# Larvel Model JSON
 
 This package has been developed by H&H|Digital, an Australian botique developer. Visit us at [hnh.digital](http://hnh.digital).
 
@@ -6,7 +6,7 @@ This package has been developed by H&H|Digital, an Australian botique developer.
 
 [![Build Status](https://travis-ci.org/bluora/laravel-model-json.svg?branch=master)](https://travis-ci.org/bluora/laravel-model-json) [![StyleCI](https://styleci.io/repos/53236988/shield)](https://styleci.io/repos/53236988) [![Test Coverage](https://codeclimate.com/github/bluora/laravel-model-json/badges/coverage.svg)](https://codeclimate.com/github/bluora/laravel-model-json/coverage) [![Code Climate](https://codeclimate.com/github/bluora/laravel-model-json/badges/gpa.svg)](https://codeclimate.com/github/bluora/laravel-model-json)
 
-Adds support for the JSON datatype column for models provided by the [Eloquent Model](http://laravel.com/docs/eloquent).
+Provides object based access to JSON datatype columns in models provided by the [Eloquent Model](http://laravel.com/docs/eloquent).
 
 ## Install
 
