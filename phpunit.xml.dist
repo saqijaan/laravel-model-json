@@ -8,10 +8,9 @@
          convertWarningsToExceptions="true"
          processIsolation="false"
          stopOnFailure="false"
-         syntaxCheck="false"
->
+         syntaxCheck="false">
     <testsuites>
-        <testsuite name="Larvel Model Json Test Suite">
+        <testsuite name="Larvel Model JSON Test Suite">
             <directory suffix=".php">./tests/</directory>
         </testsuite>
     </testsuites>

@@ -1,20 +1,16 @@
 # Provides JSON column support for Laravel's Eloquent Model
 
+This package has been developed by H&H|Digital, an Australian botique developer. Visit us at [hnh.digital](http://hnh.digital).
+
+[![Latest Stable Version](https://poser.pugx.org/bluora/laravel-model-json/v/stable.svg)](https://packagist.org/packages/bluora/laravel-model-json) [![Total Downloads](https://poser.pugx.org/bluora/laravel-model-json/downloads.svg)](https://packagist.org/packages/bluora/laravel-model-json) [![Latest Unstable Version](https://poser.pugx.org/bluora/laravel-model-json/v/unstable.svg)](https://packagist.org/packages/bluora/laravel-model-json) [![License](https://poser.pugx.org/bluora/laravel-model-json/license.svg)](https://packagist.org/packages/bluora/laravel-model-json)
+
 [![Build Status](https://travis-ci.org/bluora/laravel-model-json.svg?branch=master)](https://travis-ci.org/bluora/laravel-model-json) [![StyleCI](https://styleci.io/repos/53236988/shield)](https://styleci.io/repos/53236988) [![Test Coverage](https://codeclimate.com/github/bluora/laravel-model-json/badges/coverage.svg)](https://codeclimate.com/github/bluora/laravel-model-json/coverage) [![Code Climate](https://codeclimate.com/github/bluora/laravel-model-json/badges/gpa.svg)](https://codeclimate.com/github/bluora/laravel-model-json)
 
 Adds support for the JSON datatype column for models provided by the [Eloquent Model](http://laravel.com/docs/eloquent).
 
-## Installation
+## Install
 
-```
-composer require bluora/laravel-model-json ~1.0
-```
-
-You can also add this package to your `composer.json` file:
-
-`"bluora/laravel-model-json": "~1.0"`
-
-Then run `composer update` to download the package to your vendor directory.
+`$ composer require bluora/laravel-model-json ~1.0`
 
 ## Usage
 
@@ -112,3 +108,16 @@ protected $json_options = [
     'settings' => ['no_saving_default_values' => true]
 ];
 ```
+
+## Contributing
+
+Please see [CONTRIBUTING](https://github.com/bluora/laravel-git-info/blob/master/CONTRIBUTING.md) for details.
+
+## Credits
+
+* [Rocco Howard](https://github.com/therocis)
+* [All Contributors](https://github.com/bluora/laravel-git-info/contributors)
+
+## License
+
+The MIT License (MIT). Please see [License File](https://github.com/bluora/laravel-git-info/blob/master/LICENSE) for more information.

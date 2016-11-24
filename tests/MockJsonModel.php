@@ -1,8 +1,13 @@
 <?php
 
-class MockJsonModel extends Illuminate\Database\Eloquent\Model
+namespace Bluora\LaravelModelJson\Tests;
+
+use Bluora\LaravelModelJson\JsonColumnTrait;
+use Illuminate\Database\Eloquent\Model;
+
+class MockJsonModel extends Model
 {
-    use \Bluora\LaravelModelJson\JsonColumnTrait;
+    use JsonColumnTrait;
 
     protected $json_columns;
     protected $json_defaults;

@@ -1,6 +1,10 @@
 <?php
 
-class JsonModelTest extends PHPUnit_Framework_TestCase
+namespace Bluora\LaravelModelJson\Tests;
+
+use PHPUnit\Framework\TestCase;
+
+class JsonModelTest extends TestCase
 {
     /**
      * Assert that `newFromBuilder` correctly sets up the model, including JSON attributes.
