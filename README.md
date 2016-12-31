@@ -1,12 +1,19 @@
-# Larvel Model JSON
+```
+    __                                __    _______ ____  _   __
+   / /   ____ __________ __   _____  / /   / / ___// __ \/ | / /
+  / /   / __ `/ ___/ __ `/ | / / _ \/ /_  / /\__ \/ / / /  |/ / 
+ / /___/ /_/ / /  / /_/ /| |/ /  __/ / /_/ /___/ / /_/ / /|  /  
+/_____/\__,_/_/   \__,_/ |___/\___/_/\____//____/\____/_/ |_/   
+                                                                
+```
+
+Adds support for the JSON datatype column for models via an object based interface.
+
+[![Latest Stable Version](https://poser.pugx.org/bluora/laravel-model-json/v/stable.svg)](https://packagist.org/packages/bluora/laravel-model-json) [![Total Downloads](https://poser.pugx.org/bluora/laravel-model-json/downloads.svg)](https://packagist.org/packages/bluora/laravel-model-json) [![Latest Unstable Version](https://poser.pugx.org/bluora/laravel-model-json/v/unstable.svg)](https://packagist.org/packages/bluora/laravel-model-json) [![Built for Laravel](https://img.shields.io/badge/Built_for-Laravel-green.svg)](https://laravel.com/) [![License](https://poser.pugx.org/bluora/laravel-model-json/license.svg)](https://packagist.org/packages/bluora/laravel-model-json)
+
+[![Build Status](https://travis-ci.org/bluora/laravel-model-json.svg?branch=master)](https://travis-ci.org/bluora/laravel-model-json) [![StyleCI](https://styleci.io/repos/53236988/shield)](https://styleci.io/repos/53236988) [![Test Coverage](https://codeclimate.com/github/bluora/laravel-model-json/badges/coverage.svg)](https://codeclimate.com/github/bluora/laravel-model-json/coverage) [![Issue Count](https://codeclimate.com/github/bluora/laravel-model-json/badges/issue_count.svg)](https://codeclimate.com/github/bluora/laravel-model-json) [![Code Climate](https://codeclimate.com/github/bluora/laravel-model-json/badges/gpa.svg)](https://codeclimate.com/github/bluora/laravel-model-json)
 
 This package has been developed by H&H|Digital, an Australian botique developer. Visit us at [hnh.digital](http://hnh.digital).
-
-[![Latest Stable Version](https://poser.pugx.org/bluora/laravel-model-json/v/stable.svg)](https://packagist.org/packages/bluora/laravel-model-json) [![Total Downloads](https://poser.pugx.org/bluora/laravel-model-json/downloads.svg)](https://packagist.org/packages/bluora/laravel-model-json) [![Latest Unstable Version](https://poser.pugx.org/bluora/laravel-model-json/v/unstable.svg)](https://packagist.org/packages/bluora/laravel-model-json) [![License](https://poser.pugx.org/bluora/laravel-model-json/license.svg)](https://packagist.org/packages/bluora/laravel-model-json)
-
-[![Build Status](https://travis-ci.org/bluora/laravel-model-json.svg?branch=master)](https://travis-ci.org/bluora/laravel-model-json) [![StyleCI](https://styleci.io/repos/53236988/shield)](https://styleci.io/repos/53236988) [![Test Coverage](https://codeclimate.com/github/bluora/laravel-model-json/badges/coverage.svg)](https://codeclimate.com/github/bluora/laravel-model-json/coverage) [![Code Climate](https://codeclimate.com/github/bluora/laravel-model-json/badges/gpa.svg)](https://codeclimate.com/github/bluora/laravel-model-json)
-
-Provides object based access to JSON datatype columns in models provided by the [Eloquent Model](http://laravel.com/docs/eloquent).
 
 ## Install
 
