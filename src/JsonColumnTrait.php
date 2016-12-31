@@ -220,9 +220,9 @@ trait JsonColumnTrait
         $dirty = parent::getDirty();
         if (!empty($this->json_values)) {
             foreach ($this->json_values as $column_name => $json_data) {
-                if (count($json_data->getDirty())) {
+                if ($count = count($json_data->getDirty())) {
                     $dirty[$column_name] = (string) $json_data;
-                } else {
+                } elseif ($count == 0) {
                     unset($dirty[$column_name]);
                 }
             }
