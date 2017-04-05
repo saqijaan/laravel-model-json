@@ -41,6 +41,12 @@ class JsonColumnValue
     {
         $this->internal_original_value = &$attribute_value;
         $this->internal_original_data = (!is_array($attribute_value)) ? json_decode($this->internal_original_value, true) : $this->internal_original_value;
+
+        // Value was double encoded.
+        if (is_string($this->internal_original_data)) {
+            $this->internal_original_data = json_decode($this->internal_original_data, true);
+        }
+
         $this->internal_defaults = $defaults;
         $this->internal_options = $options;
         foreach ($this->internal_original_data as $key => $value) {
@@ -186,7 +192,6 @@ class JsonColumnValue
         if (!isset($this->$key)) {
             $this->$key = null;
         }
-
         return $this->$key;
     }
 
