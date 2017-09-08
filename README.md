@@ -9,15 +9,15 @@
 
 Adds support for the JSON datatype column for models via an object based interface.
 
-[![Latest Stable Version](https://poser.pugx.org/bluora/laravel-model-json/v/stable.svg)](https://packagist.org/packages/bluora/laravel-model-json) [![Total Downloads](https://poser.pugx.org/bluora/laravel-model-json/downloads.svg)](https://packagist.org/packages/bluora/laravel-model-json) [![Latest Unstable Version](https://poser.pugx.org/bluora/laravel-model-json/v/unstable.svg)](https://packagist.org/packages/bluora/laravel-model-json) [![Built for Laravel](https://img.shields.io/badge/Built_for-Laravel-green.svg)](https://laravel.com/) [![License](https://poser.pugx.org/bluora/laravel-model-json/license.svg)](https://packagist.org/packages/bluora/laravel-model-json)
+[![Latest Stable Version](https://poser.pugx.org/hnhdigital-os/laravel-model-json/v/stable.svg)](https://packagist.org/packages/hnhdigital-os/laravel-model-json) [![Total Downloads](https://poser.pugx.org/hnhdigital-os/laravel-model-json/downloads.svg)](https://packagist.org/packages/hnhdigital-os/laravel-model-json) [![Latest Unstable Version](https://poser.pugx.org/hnhdigital-os/laravel-model-json/v/unstable.svg)](https://packagist.org/packages/hnhdigital-os/laravel-model-json) [![Built for Laravel](https://img.shields.io/badge/Built_for-Laravel-green.svg)](https://laravel.com/) [![License](https://poser.pugx.org/hnhdigital-os/laravel-model-json/license.svg)](https://packagist.org/packages/hnhdigital-os/laravel-model-json)
 
-[![Build Status](https://travis-ci.org/bluora/laravel-model-json.svg?branch=master)](https://travis-ci.org/bluora/laravel-model-json) [![StyleCI](https://styleci.io/repos/53236988/shield)](https://styleci.io/repos/53236988) [![Test Coverage](https://codeclimate.com/github/bluora/laravel-model-json/badges/coverage.svg)](https://codeclimate.com/github/bluora/laravel-model-json/coverage) [![Issue Count](https://codeclimate.com/github/bluora/laravel-model-json/badges/issue_count.svg)](https://codeclimate.com/github/bluora/laravel-model-json) [![Code Climate](https://codeclimate.com/github/bluora/laravel-model-json/badges/gpa.svg)](https://codeclimate.com/github/bluora/laravel-model-json)
+[![Build Status](https://travis-ci.org/hnhdigital-os/laravel-model-json.svg?branch=master)](https://travis-ci.org/hnhdigital-os/laravel-model-json) [![StyleCI](https://styleci.io/repos/53236988/shield)](https://styleci.io/repos/53236988) [![Test Coverage](https://codeclimate.com/github/hnhdigital-os/laravel-model-json/badges/coverage.svg)](https://codeclimate.com/github/hnhdigital-os/laravel-model-json/coverage) [![Issue Count](https://codeclimate.com/github/hnhdigital-os/laravel-model-json/badges/issue_count.svg)](https://codeclimate.com/github/hnhdigital-os/laravel-model-json) [![Code Climate](https://codeclimate.com/github/hnhdigital-os/laravel-model-json/badges/gpa.svg)](https://codeclimate.com/github/hnhdigital-os/laravel-model-json)
 
 This package has been developed by H&H|Digital, an Australian botique developer. Visit us at [hnh.digital](http://hnh.digital).
 
 ## Install
 
-`$ composer require bluora/laravel-model-json ~1.0`
+`$ composer require hnhdigital-os/laravel-model-json ~1.0`
 
 ## Usage
 
@@ -118,13 +118,13 @@ protected $json_options = [
 
 ## Contributing
 
-Please see [CONTRIBUTING](https://github.com/bluora/laravel-git-info/blob/master/CONTRIBUTING.md) for details.
+Please see [CONTRIBUTING](https://github.com/hnhdigital-os/laravel-git-info/blob/master/CONTRIBUTING.md) for details.
 
 ## Credits
 
 * [Rocco Howard](https://github.com/therocis)
-* [All Contributors](https://github.com/bluora/laravel-git-info/contributors)
+* [All Contributors](https://github.com/hnhdigital-os/laravel-git-info/contributors)
 
 ## License
 
-The MIT License (MIT). Please see [License File](https://github.com/bluora/laravel-git-info/blob/master/LICENSE) for more information.
+The MIT License (MIT). Please see [License File](https://github.com/hnhdigital-os/laravel-git-info/blob/master/LICENSE) for more information.
