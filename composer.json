@@ -1,12 +1,12 @@
 {
-    "name": "bluora/laravel-model-json",
+    "name": "hnhdigital-os/laravel-model-json",
     "description": "Provides JSON column support for for Laravel's Eloquent Model.",
     "keywords": ["laravel","illuminate","eloquent","json","schemaless","schema-free"],
     "license": "MIT",
     "authors": [
         {
             "name": "Rocco Howard",
-            "email": "rocco@bluora.com.au"
+            "email": "rocco@hnh.digital"
         }
     ],
     "require": {
