@@ -208,6 +208,22 @@ trait JsonColumnTrait
     }
 
     /**
+     * Determine if the new and old values for a given key are equivalent.
+     *
+     * @param  string $key
+     * @param  mixed  $current
+     * @return bool
+     */
+    protected function originalIsEquivalent($key, $current)
+    {
+        if (in_array($key, $this->json_columns) && is_array($current)) {
+            $current = json_encode($current);
+        }
+
+        parent::originalIsEquivalent($key, $current);
+    }
+
+    /**
      * Add the change in any json value objects, and if requested
      * provide the columns (dot notation) within the json value objects.
      *
@@ -218,6 +234,7 @@ trait JsonColumnTrait
     public function getDirty($include_json = false)
     {
         $dirty = parent::getDirty();
+
         if (!empty($this->json_values)) {
             foreach ($this->json_values as $column_name => $json_data) {
                 if ($count = count($json_data->getDirty())) {
