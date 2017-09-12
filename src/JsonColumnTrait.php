@@ -210,8 +210,9 @@ trait JsonColumnTrait
     /**
      * Determine if the new and old values for a given key are equivalent.
      *
-     * @param  string $key
-     * @param  mixed  $current
+     * @param string $key
+     * @param mixed  $current
+     *
      * @return bool
      */
     protected function originalIsEquivalent($key, $current)
