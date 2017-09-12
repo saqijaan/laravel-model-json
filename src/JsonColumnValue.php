@@ -192,7 +192,6 @@ class JsonColumnValue
         if (!isset($this->$key)) {
             $this->$key = null;
         }
-
         return $this->$key;
     }
 
