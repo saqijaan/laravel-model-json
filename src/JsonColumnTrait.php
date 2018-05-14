@@ -208,6 +208,22 @@ trait JsonColumnTrait
     }
 
     /**
+     * Decode the given JSON back into an array or object.
+     *
+     * @param  string  $value
+     * @param  bool  $asObject
+     * @return mixed
+     */
+    public function fromJson($value, $asObject = false)
+    {
+        if (is_array($value)) {
+            return $value;
+        }
+
+        return json_decode($value, ! $asObject);
+    }
+
+    /**
      * Determine if the new and old values for a given key are equivalent.
      *
      * @param string $key
