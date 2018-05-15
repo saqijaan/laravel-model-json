@@ -210,8 +210,9 @@ trait JsonColumnTrait
     /**
      * Decode the given JSON back into an array or object.
      *
-     * @param  string  $value
-     * @param  bool  $asObject
+     * @param string $value
+     * @param bool   $asObject
+     *
      * @return mixed
      */
     public function fromJson($value, $asObject = false)
@@ -220,7 +221,7 @@ trait JsonColumnTrait
             return $value;
         }
 
-        return json_decode($value, ! $asObject);
+        return json_decode($value, !$asObject);
     }
 
     /**
