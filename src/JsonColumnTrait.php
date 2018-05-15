@@ -237,7 +237,7 @@ trait JsonColumnTrait
             $current = json_encode($current);
         }
 
-        parent::originalIsEquivalent($key, $current);
+        return parent::originalIsEquivalent($key, $current);
     }
 
     /**
