@@ -232,7 +232,7 @@ trait JsonColumnTrait
      *
      * @return bool
      */
-    protected function originalIsEquivalent($key, $current)
+    public function originalIsEquivalent($key, $current)
     {
         if (isset($this->json_columns) && in_array($key, $this->json_columns) && is_array($current)) {
             $current = json_encode($current);
