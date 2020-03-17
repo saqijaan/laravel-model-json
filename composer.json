@@ -1,5 +1,5 @@
 {
-    "name": "saqijaan/larave-json-column",
+    "name": "saqijaan/laravel-json-column",
     "description": "Provides JSON column support for for Laravel's Eloquent Model.",
     "keywords": ["laravel","illuminate","eloquent","json","schemaless","schema-free"],
     "license": "MIT",
